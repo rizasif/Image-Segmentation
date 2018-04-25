@@ -18,11 +18,10 @@ h, w, channels = img.shape
 
 start_centers = [(w/2, h/2), (w,0), (w,h/2), (w/2,h), (0,h), (0,0), (h/2,0), (0,w/2)]
 
-xmeans_instance = xmeans(data=kpArray, kmax=10, initial_centers=start_centers, tolerance= 0.000001,
+xmeans_instance = xmeans(data=kpArray, kmax=20, initial_centers=start_centers, tolerance= 0.000001,
 		criterion=splitting_type.BAYESIAN_INFORMATION_CRITERION)
 xmeans_instance.process()
 clusters = xmeans_instance.get_clusters()
-
 
 def getMinMax(alist):
 	z = zip(*alist)
