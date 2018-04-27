@@ -10,6 +10,7 @@ class DataEntry():
 		DONE = 200
 		RESET = 300
 		EXIT = 100
+		ALL = 800
 		NONE = 600
 
 	def __init__(self):
@@ -42,6 +43,8 @@ class DataEntry():
 				status = self.STATUS.RESET
 			elif(iput == 'd'):
 				status = self.STATUS.DONE
+			elif(iput == 'a'):
+				status = self.STATUS.ALL
 			elif(iput == 'e'):
 				status = self.STATUS.EXIT
 			else:
@@ -67,7 +70,7 @@ class DataEntry():
 			img, clusterList, clusterBound = IS.SegmentImage(self.folder_name + "/" + image_name)
 			IS.showImage(image_name, img)
 
-			print "-----------------\nImage: " + image_name + "\nAvailable Inputs [d = Done, r = Reset, e = Exit]"
+			print "-----------------\nImage: " + image_name + "\nAvailable Inputs [d = Done, a=Select All, r = Reset, e = Exit]"
 			blur_clusters = []
 			while True:
 				print "Clusters Selected: ", blur_clusters
@@ -82,6 +85,13 @@ class DataEntry():
 										cluster_contours=clusterBound,
 										blur_clusters=blur_clusters,
 										valid_image = (len(clusterList)>=len(blur_clusters)) )
+					break
+				elif(status == self.STATUS.ALL):
+					self.DB.insert_data(name=image_name,
+										num_of_clusters=len(clusterList),
+										cluster_contours=clusterBound,
+										blur_clusters=[-1],
+										valid_image = False )
 					break
 				elif(status == self.STATUS.RESET):
 					blur_clusters = []
