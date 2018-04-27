@@ -63,7 +63,7 @@ def SegmentImage(image_name):
 			img = cv2.rectangle(img.copy(), clusterBound[cluster_index][0], clusterBound[cluster_index][1], (0,0,255))
 			center = ( (clusterBound[cluster_index][0][0]+clusterBound[cluster_index][1][0])/2,
 						(clusterBound[cluster_index][0][1]+clusterBound[cluster_index][1][1])/2 )
-			img = cv2.putText(img.copy(), str(i), center, cv2.FONT_HERSHEY_COMPLEX, 1, (0,0,255), 2, cv2.LINE_AA)
+			img = cv2.putText(img.copy(), str(cluster_index), center, cv2.FONT_HERSHEY_COMPLEX, 1, (0,0,255), 2, cv2.LINE_AA)
 		else:
 			clusterList.pop(cluster_index)
 	return img, clusterList, clusterBound
